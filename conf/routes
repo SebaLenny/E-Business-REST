@@ -1,0 +1,21 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# An example controller showing a sample home page
+GET     /                           controllers.HomeController.index
+# An example controller showing how to use dependency injection
+GET     /count                      controllers.CountController.count
+# An example controller showing how to write asynchronous code
+GET     /message                    controllers.AsyncController.message
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
+
+GET     /product                      controllers.ProductController.index()
+# TODO: How to do this? Should clear cart.
+GET     /product/create               controllers.ProductController.create()
+GET     /product/edit/:id             controllers.ProductController.edit(id : Integer)
+POST    /product/edit                 controllers.ProductController.update()
+POST    /product/create               controllers.ProductController.save()
+GET     /product/delete/:id           controllers.ProductController.delete(id : Integer)

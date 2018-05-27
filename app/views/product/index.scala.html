@@ -1,0 +1,28 @@
+@(products: List[Product])
+
+@main("Products"){
+    <h1>All Products:</h1>
+    <div class="container">
+            <!-- Example row of columns -->
+        <div class="row">
+            <div class="cntr">
+            @for(product <- products) {
+                <div class="col-md-4">
+                    <h2 id="prod1_name">@product.name</h2>
+                    <p id="prod1_desc">Price: @product.price $</p>
+                    <p id="prod1_desc">Author: @product.manufacturer</p>
+                    <div class="btn-group">
+                        <a type="button" href="@routes.ProductController.edit(product.id)" class="btn btn-secondary">Edit</a>
+                        <a type="button" href="@routes.ProductController.delete(product.id)" class="btn btn-secondary">Delete</a>
+                    </div>
+                </div>
+            }
+            </div>
+        </div>
+        <hr>
+        <div class="cntr">
+            <a type="button" href="@routes.ProductController.create()" class="btn btn-secondary btn-lg">Create new product</a>
+        </div>
+
+    </div> <!-- /container -->
+}

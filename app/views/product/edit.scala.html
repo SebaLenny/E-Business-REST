@@ -1,0 +1,14 @@
+@(productForm : Form[Product])
+@import helper._
+
+@main("Edit product") {
+    <h1>Edit Product:</h1>
+    @helper.form(CSRF(routes.ProductController.update())) {
+        @helper.inputText(productForm("id"))
+        @helper.inputText(productForm("name"))
+        @helper.inputText(productForm("price"))
+        @helper.inputText(productForm("manufacturer"))
+
+        <input type="submit" class="btn btn-default" value="Save changes"/>
+    }
+}

@@ -1,0 +1,11 @@
+@(product: Product)
+
+@main("Show product"){
+    <h2>@product.name</h2>
+    <p>Price: @product.price</p>
+    <p>Manufacturer: @product.manufacturer</p>
+
+    <a href="@routes.ProductController.edit(product.id)">Edit</a>
+    <a href="@routes.ProductController.delete(product.id)">Delete</a>
+}
+

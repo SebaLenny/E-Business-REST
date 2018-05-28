@@ -6,12 +6,14 @@ import io.ebean.Finder;
 import io.ebean.Model;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 
 @Entity
 public class Product extends Model {
     @Id
+    @GeneratedValue
     public Integer id;
     public String name;
     public Integer price;
@@ -22,6 +24,10 @@ public class Product extends Model {
         this.name = name;
         this.price = price;
         this.manufacturer = manufacturer;
+    }
+
+    public Product(){
+
     }
 
     public static Finder<Integer, Product> find = new Finder<>(Product.class);

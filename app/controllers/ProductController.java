@@ -99,7 +99,7 @@ public class ProductController extends Controller {
     }
 
     private Result getAllProducts() {
-        Set<Product> productset = Product.retrieveAll();
+        List<Product> productset = Product.retrieveAll();
         return ok(Json.toJson(productset != null ? productset : ""));
     }
 

@@ -1,7 +1,9 @@
 package models;
 
+import java.util.List;
 import java.util.Set;
 
+import com.google.common.collect.Lists;
 import io.ebean.Finder;
 import io.ebean.Model;
 
@@ -32,9 +34,9 @@ public class Product extends Model {
 
     public static Finder<Integer, Product> find = new Finder<>(Product.class);
 
-    private static Set<Product> products;
+    private static List<Product> products = Lists.newArrayList();
 
-    public static Set<Product> retrieveAll() {
+    public static List<Product> retrieveAll() {
         return products;
     }
 

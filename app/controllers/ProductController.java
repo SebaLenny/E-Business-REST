@@ -153,7 +153,7 @@ public class ProductController extends Controller {
 
     public void manageHeaders() {
         response().setHeader(CACHE_CONTROL, "max-age=3600");
-        response().setHeader(Http.HeaderNames.ACCESS_CONTROL_ALLOW_METHODS, "*");
+        response().setHeader(Http.HeaderNames.ACCESS_CONTROL_ALLOW_ORIGIN, "*");
         //response().setHeader(ETAG, "xxx");
     }
 

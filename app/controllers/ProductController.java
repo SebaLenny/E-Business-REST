@@ -100,7 +100,7 @@ public class ProductController extends Controller {
 
     private Result getAllProducts() {
         List<Product> productset = Product.retrieveAll();
-        return ok(Json.toJson(productset != null ? productset : ""));
+        return ok(Json.toJson(productset));
     }
 
     public Result getWithIndex(Integer id) {
@@ -115,9 +115,11 @@ public class ProductController extends Controller {
         ProductJson productJson;
         productJson = Json.fromJson(request().body().asJson(), ProductJson.class);
         Product product = new Product();
+        product.link = productJson.link;
         product.name = productJson.name;
-        product.manufacturer = productJson.manufacturer;
-        product.price = Integer.parseInt(productJson.price);
+        product.price = Float.parseFloat(productJson.price);
+        product.description = productJson.description;
+        product.picture = productJson.picture;
         product.save();
         Product.add(product);
         return ok("Product successfully created");
@@ -129,11 +131,12 @@ public class ProductController extends Controller {
         if (oldProduct == null) {
             return notFound("Product not found!");
         }
+        oldProduct.link = product.link;
         oldProduct.name = product.name;
         oldProduct.price = product.price;
-        oldProduct.manufacturer = product.manufacturer;
+        oldProduct.description = product.description;
+        oldProduct.picture = product.picture;
         oldProduct.update();
-        System.out.print(oldProduct.name);
         return ok("Product successfully edited");
     }
 

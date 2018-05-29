@@ -12,8 +12,11 @@ public class ProductToProductJson implements Function<Product, ProductJson> {
     public ProductJson apply(Product product) {
         return new ProductJson(
                 Integer.toString(product.id),
+                product.link,
                 product.name,
-                Integer.toString(product.price),
-                product.manufacturer);
+                Float.toString(product.price),
+                product.description,
+                product.picture);
+
     }
 }

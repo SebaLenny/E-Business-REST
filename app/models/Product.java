@@ -18,15 +18,19 @@ public class Product extends Model {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer id;
+    public String link;
     public String name;
-    public Integer price;
-    public String manufacturer;
+    public Float price;
+    public String description;
+    public String picture;
 
-    public Product(Integer id, String name, Integer price, String manufacturer) {
+    public Product(Integer id,String link, String name, Float price,String description, String picture) {
         this.id = id;
+        this.link = link;
         this.name = name;
         this.price = price;
-        this.manufacturer = manufacturer;
+        this.description = description;
+        this.picture = picture;
     }
 
     public Product(){
@@ -43,13 +47,13 @@ public class Product extends Model {
     }
 
     public static Product retrieveById(Integer id) {
-        for (Product product : products) {
-            if (id.equals(product.id)) {
-                return product;
-            }
-        }
-        return null;
-        //return find.ref(id);
+//        for (Product product : products) {
+//            if (id.equals(product.id)) {
+//                return product;
+//            }
+//        }
+//        return null;
+        return find.ref(id);
     }
 
     public static void add(Product product) {

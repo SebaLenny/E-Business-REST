@@ -10,12 +10,13 @@ import io.ebean.Model;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.*;
 
 
 @Entity
 public class Product extends Model {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer id;
     public String name;
     public Integer price;
@@ -37,7 +38,8 @@ public class Product extends Model {
     private static List<Product> products = Lists.newArrayList();
 
     public static List<Product> retrieveAll() {
-        return products;
+        return find.query().findList();
+        //return products;
     }
 
     public static Product retrieveById(Integer id) {
@@ -47,6 +49,7 @@ public class Product extends Model {
             }
         }
         return null;
+        //return find.ref(id);
     }
 
     public static void add(Product product) {

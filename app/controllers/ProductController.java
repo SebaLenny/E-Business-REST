@@ -118,6 +118,7 @@ public class ProductController extends Controller {
         product.name = productJson.name;
         product.manufacturer = productJson.manufacturer;
         product.price = Integer.parseInt(productJson.price);
+        product.save();
         Product.add(product);
         return ok("Product successfully created");
     }
@@ -132,7 +133,7 @@ public class ProductController extends Controller {
         oldProduct.price = product.price;
         oldProduct.manufacturer = product.manufacturer;
         oldProduct.update();
-
+        System.out.print(oldProduct.name);
         return ok("Product successfully edited");
     }
 

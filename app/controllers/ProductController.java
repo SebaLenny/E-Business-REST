@@ -2,22 +2,18 @@ package controllers;
 
 import json.ProductJson;
 import models.Product;
-import play.data.Form;
-import play.data.FormFactory;
-import play.filters.csrf.CSRF;
+import play.mvc.Http;
 import play.mvc.Result;
 import play.mvc.Controller;
 import play.libs.Json;
 
 import java.util.List;
-import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import converters.ProductToProductJson;
 
 import views.html.product.*;
-import views.html.product.index;
 
 
 //import views.html.index;
@@ -99,11 +95,13 @@ public class ProductController extends Controller {
     }
 
     private Result getAllProducts() {
+        manageHeaders();
         List<Product> productset = Product.retrieveAll();
         return ok(Json.toJson(productset));
     }
 
     public Result getWithIndex(Integer id) {
+        manageHeaders();
         Product product = Product.find.byId(id);
         if (product == null) {
             return notFound("Product not found!");
@@ -112,6 +110,7 @@ public class ProductController extends Controller {
     }
 
     public Result create() {
+        manageHeaders();
         ProductJson productJson;
         productJson = Json.fromJson(request().body().asJson(), ProductJson.class);
         Product product = new Product();
@@ -126,6 +125,7 @@ public class ProductController extends Controller {
     }
 
     public Result update() {
+        manageHeaders();
         Product product = Json.fromJson(request().body().asJson(), Product.class);
         Product oldProduct = Product.find.byId(product.id);
         if (oldProduct == null) {
@@ -142,12 +142,19 @@ public class ProductController extends Controller {
 
 
     public Result delete(Integer id) {
+        manageHeaders();
         Product product = Product.find.byId(id);
         if (product == null) {
             return notFound("Product not found");
         }
         product.delete();
         return ok("Product deleted successfully");
+    }
+
+    public void manageHeaders() {
+        response().setHeader(CACHE_CONTROL, "max-age=3600");
+        response().setHeader(Http.HeaderNames.ACCESS_CONTROL_ALLOW_METHODS, "*");
+        //response().setHeader(ETAG, "xxx");
     }
 
 }
